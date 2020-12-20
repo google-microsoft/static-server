@@ -5,8 +5,9 @@ const Koa = require('koa');
 const app = new Koa();
 
 const {PORT, FILEDIR} = process.env;
-app.use(serveList(FILEDIR, {}));
-app.use(serveStatic(FILEDIR, {}));
+app.use(require('koa-static')(FILEDIR, {gzip: true}));
+app.use(serveList(FILEDIR));
+app.use(serveStatic(FILEDIR));
 
 
 app.listen(PORT);
